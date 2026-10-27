@@ -17,6 +17,16 @@ jobs:
         with:
           release: latest
 
+      # Persist the build tool's incremental build state so tasks whose
+      # inputs haven't changed are skipped as up to date.
+      - name: Cache MATLAB build tool state
+        uses: actions/cache@v4
+        with:
+          path: .buildtool
+          key: buildtool-${{ runner.os }}-${{ hashFiles('buildfile.m', 'src/**', 'tests/**') }}
+          restore-keys: |
+            buildtool-${{ runner.os }}-
+
       - name: Run MATLAB build
         uses: matlab-actions/run-build@v3
         with:
