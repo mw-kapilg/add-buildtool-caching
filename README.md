@@ -13,3 +13,5 @@ buildtool check test
 ```
 
 CI runs the build on GitHub Actions — see `.github/workflows/ci.yml`.
+
+Builds are cached between CI runs.
